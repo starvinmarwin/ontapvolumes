@@ -28,3 +28,4 @@
       - { volume: 'vol7', volume_size: '120', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
       - { volume: 'vol13', volume_size: '30', volume_size_unit: 'mb', vserver: 'trident_semsi', aggregate_name: 'ssd01' }
       - { volume: 'vol14', volume_size: '40', volume_size_unit: 'mb', vserver: 'trident_semsi', aggregate_name: 'ssd02' }
+      - { volume: 'voltest12', volume_size: '20', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
