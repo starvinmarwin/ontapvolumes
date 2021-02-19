@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  collections:
+    - netapp.ontap
+  gather_facts: false
+  vars:
+    login: &login
+      hostname: "{{ hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      https: true
+      validate_certs: false
+  name: Onboard SVM
+  tasks:
+  - name:  Create Volume
+    na_ontap_volume:
+      state: present
+      name: "{{ item.volume }}"
+      size: "{{ item.volume_size }}"
+      size_unit: "{{ item.volume_size_unit }}"
+      vserver: "{{ item.vserver }}"
+      aggregate_name: "{{ item.aggregate_name }}"
+      policy: "{{ policy }}"
+      <<: *login
+    loop:
+      - { volume: 'vol5', volume_size: '20', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
+      - { volume: 'vol6', volume_size: '60', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
+      - { volume: 'vol7', volume_size: '120', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
+      - { volume: 'vol13', volume_size: '30', volume_size_unit: 'mb', vserver: 'trident_semsi', aggregate_name: 'ssd01' }
+      - { volume: 'vol14', volume_size: '40', volume_size_unit: 'mb', vserver: 'trident_semsi', aggregate_name: 'ssd02' }
