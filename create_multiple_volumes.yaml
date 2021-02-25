@@ -31,4 +31,4 @@
       - { volume: 'voltest12', volume_size: '40', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
       - { volume: 'voltest13', volume_size: '50', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
       - { volume: 'voltest14', volume_size: '55', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
-      - { volume: 'voltest15', volume_size: '78', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
+      - { volume: 'voltest15', volume_size: '88', volume_size_unit: 'mb', vserver: 'ansibleSVM', aggregate_name: 'ssd01' }
