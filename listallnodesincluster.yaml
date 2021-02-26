@@ -10,8 +10,8 @@
       state: info
       gather_subset: cluster_node_info
       hostname: "{{ hostname }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
       https: true
       validate_certs: false
     register: ontap_info
