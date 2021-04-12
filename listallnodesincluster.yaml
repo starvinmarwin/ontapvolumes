@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  environment:
+   no_proxy: 10.87.170.10
   name: Setup ONTAP
   gather_facts: false
   collections:
