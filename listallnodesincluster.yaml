@@ -12,7 +12,7 @@
       hostname: "{{ hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
-      https: false
+      https: true
       validate_certs: false
     register: ontap_info
   - debug: 
