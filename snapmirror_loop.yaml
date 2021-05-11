@@ -1,0 +1,13 @@
+  - name: Create Snapmirror relationship (create destination volume)
+    na_ontap_snapmirror:
+      state: present
+      source_endpoint:
+        cluster: "{{ item.source_cluster }}"
+        path: "{{ source_vserver + ':' + source_volume }}"
+      destination_endpoint:
+        cluster: "{{ _destination_cluster }}"
+        path: "{{ destination_vserver_VOLDP + ':' + destination_volume }}"
+      create_destination:
+        enabled: true
+      loop: / with_items: ???
+        - { ???
