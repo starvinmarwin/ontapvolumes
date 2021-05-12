@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+  environment:
+    no_proxy: "{{ hostname }}"
+  collections:
+    - netapp.ontap
+  gather_facts: false
+  vars:
+    login: &login
+      hostname: "{{ hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  name: Create Snappmirror relationships
+  tasks:
+  - name: Create Snapmirror relationship (create destination volume)
+    na_ontap_snapmirror:
+      state: present
+      source_endpoint:
+        cluster: {{ item.key }}
+        path: {{ item.value }}
+      loop: "{{ source_cluster | dict2items }}"
+        vars:
+          source_cluster:
+            cluster1: svm1:volume1
+            cluster1: svm1:volume2
+      destination_endpoint:
+        cluster: {{ item.key }}
+        path: {{ item.value }}
+      loop: "{{ dest_cluster | dict2items }}"
+        vars:
+          dest_cluster:
+            cluster2: svm1:volume1
+            cluster2: svm1:volume2
+      create_destination:
+        enabled: true
+      <<: *login
