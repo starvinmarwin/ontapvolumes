@@ -1,0 +1,11 @@
+- name: Delete Routes
+    na_ontap_net_routes:
+      state: absent
+      vserver: "{{ item.value.vserver }}"
+      destination: "{{ item.value.destination }}"
+      gateway: "{{ item.value.gateway }}"
+      metric: "{{ item.value.metric }}"
+      hostname: "{{ connection_ip }}"
+      <<: *login
+    loop: "{{ all_info.ontap_info.net_routes_info | dict2items }}"
+    when: item.value.destination != "0.0.0.0/0"
