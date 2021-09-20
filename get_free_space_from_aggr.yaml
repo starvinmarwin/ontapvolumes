@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  collections:
+    - netapp.ontap
+  gather_facts: false
+  vars:
+    login: &login
+      hostname: "{{ hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false 
+  tasks:
+  - name: Gather facts
+    na_ontap_info:
+      gather_subset: aggregate_info
+      query:
+          aggr-attributes:
+            aggr-raid-attributes:
+              is-root-aggregate: "false"
+      <<: *login
+    register: netapp_info
+  - debug:
+      msg: "{{ item }} has {{ (netapp_info.ontap_info.aggregate_info[item].aggr_space_attributes.size_available | int / 1024 / 1024 / 1024 / 1024) | round(2) }} TB free."
+    with_items: "{{ netapp_info.ontap_info.aggregate_info }}"
